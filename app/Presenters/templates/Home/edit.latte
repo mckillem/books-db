@@ -1,0 +1,8 @@
+{block content}
+	<h1 n:block="title">{if !empty($id)}Editace knihy{else}Vložení knihy{/if}</h1>
+
+	<a href="{link Home:default}">Zpět na seznam</a>
+	<hr>
+
+	{control bookForm}
+{/block}

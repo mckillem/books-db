@@ -1,0 +1,8 @@
+{block content}
+	<a href="{link Home:edit}"><span class="glyphicon glyphicon-plus"></span> Přidej knihu</a>
+	<ul>
+		{foreach $books as $book}
+			<li>{$book->title}<a n:href="delete $book->id">Smazat</a><a n:href="Home:edit $book->id">Upravit</a></li>
+		{/foreach}
+	</ul>
+{/block}

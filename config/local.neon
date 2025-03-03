@@ -1,0 +1,7 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=database;dbname=books-db'
+	user: test
+	password: test
