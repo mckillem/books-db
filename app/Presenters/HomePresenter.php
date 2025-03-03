@@ -7,6 +7,7 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Models\Book;
+use Nette\Utils\Validators;
 
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
@@ -78,4 +79,25 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 //		$this->flashMessage('Úkol byl upraven', 'success');
 //		$this->redirect('this');
 //	}
+
+	public function handleAuthor($author_id)
+	{
+		if(Validators::isNumericInt($author_id) !== true)
+		{
+			$this->flashMessage('Autor musí být zadán podle jeho ID','alert alert-danger');
+			$this->redirect('default');
+		}
+		if(($this->context->author->find($author_id)) == NULL) {
+			$this->flashMessage("Autor nebyl nalezen.", "alert alert-danger");
+			$this->redirect("default");
+		}
+
+		$arr = array();
+		foreach($this->context->booksAuthors->findBy(array('author_id'=>$author_id)) as $book)
+		{
+			$arr[] = $book->books_id;
+		}
+		$this->sql = $this->context->books->findBy(array('id'=>$arr));
+
+	}
 }
