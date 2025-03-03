@@ -4,17 +4,17 @@ CREATE TABLE `book`
     `title` VARCHAR(255) NOT NULL,
     `isbn` varchar(128) NOT NULL,
     `pages` smallint(5) NOT NULL,
-    `date` date NOT NULL,
+    `date` year NOT NULL,
     `language` varchar(128) NOT NULL
 ) ENGINE = InnoDB
   CHARSET = utf8;
 
 # login: test, heslo: test (hashed)
 INSERT INTO `book` (`id`, `title`, `isbn`, `pages`, `date`, `language`)
-VALUES (1, 'Atomic habits', 'koko', 100, '2013-11-20', 'English'),
-       (2, 'Ultralearning', 'koko', 100, '2013-11-20', 'English'),
-       (3, 'The answer', 'koko', 100, '2013-11-20', 'English'),
-       (4, 'Scattered minds', 'koko', 100, '2013-11-20', 'English');
+VALUES (1, 'Atomic habits', 'koko', 100, '2013', 'English'),
+       (2, 'Ultralearning', 'koko', 100, '2013', 'English'),
+       (3, 'The answer', 'koko', 100, '2013', 'English'),
+       (4, 'Scattered minds', 'koko', 100, '2013', 'English');
 
 CREATE TABLE `author`
 (

@@ -29,8 +29,21 @@ class Book
 
 	public function saveBook(\stdClass $data): void
 	{
-		$this->db->table('book')->insert([
+		$book = $this->db->table('book')->insert([
 			'title' => $data->title,
+			'isbn' => $data->isbn,
+			'pages' => $data->pages,
+			'date' => $data->date,
+			'language' => $data->language,
+		]);
+
+		$author = $this->db->table('author')->insert([
+			'name' => $data->author
+		]);
+
+		$this->db->table('book_author')->insert([
+			'book_id' => $book->id,
+			'author_id' => $author->id
 		]);
 	}
 

@@ -42,7 +42,18 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 				->setDefaultValue($this->book->getBookById($this->id))
 				->setRequired();
 		} else {
-			$form->addText('title', 'Úkol:')
+			$form->addText('title', 'Název:')
+				->setRequired();
+			$form->addText('author', 'Autor:')
+				->setRequired();
+			$form->addText('isbn', 'ISBN:')
+				->setRequired();
+			$form->addInteger('pages', 'Počet stran')
+				->setRequired();
+			$form->addDate('date', 'Datum:')
+				->setFormat('Y')
+				->setRequired();
+			$form->addText('language', 'Jazyk:')
 				->setRequired();
 		}
 
@@ -60,7 +71,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 			$this->book->saveBook($data);
 		}
 
-		$this->flashMessage('Úkol byl uložen', 'success');
+		$this->flashMessage('Kniha byla uložena', 'success');
 		$this->redirect('Home:default');
 	}
 
@@ -68,7 +79,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 	{
 		$this->book->deleteBook($id);
 
-		$this->flashMessage('Úkol byl smazán', 'success');
+		$this->flashMessage('Kniha byla smazána', 'success');
 		$this->redirect('Home:default');
 	}
 
