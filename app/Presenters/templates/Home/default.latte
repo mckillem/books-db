@@ -10,6 +10,9 @@
 			<th>Strany</th>
 			<th>Vydáno</th>
 			<th>Jazyk</th>
+			<th>Přečteno</th>
+			<th>Mám</th>
+			<th>Proč ji pořídít, o čem je, co jsem si zní odnesl</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -24,6 +27,9 @@
 			<td>{$book->pages}</td>
 			<td>{$book->date}</td>
 			<td>{$book->language}</td>
+			<td>{$book->read ? 'ano' : 'ne'}</td>
+			<td>{$book->own ? 'ano' : 'ne'}</td>
+			<td>{$book->description}</td>
 		</tr>
 		</tbody>
 	</table>

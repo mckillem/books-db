@@ -5,16 +5,19 @@ CREATE TABLE `book`
     `isbn` varchar(128) NOT NULL,
     `pages` smallint(5) NOT NULL,
     `date` year NOT NULL,
-    `language` varchar(128) NOT NULL
+    `language` varchar(128) NOT NULL,
+    `read` boolean NOT NULL default 0,
+    `own` boolean NOT NULL default 0,
+    `description` VARCHAR(255) NOT NULL
 ) ENGINE = InnoDB
   CHARSET = utf8;
 
 # login: test, heslo: test (hashed)
-INSERT INTO `book` (`id`, `title`, `isbn`, `pages`, `date`, `language`)
-VALUES (1, 'Atomic habits', 'koko', 100, '2013', 'English'),
-       (2, 'Ultralearning', 'koko', 100, '2013', 'English'),
-       (3, 'The answer', 'koko', 100, '2013', 'English'),
-       (4, 'Scattered minds', 'koko', 100, '2013', 'English');
+INSERT INTO `book` (`id`, `title`, `isbn`, `pages`, `date`, `language`, `read`, `own`, `description`)
+VALUES (1, 'Atomic habits', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
+       (2, 'Ultralearning', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
+       (3, 'The answer', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
+       (4, 'Scattered minds', 'koko', 100, '2013', 'English', true, false, 'něco o knize');
 
 CREATE TABLE `author`
 (

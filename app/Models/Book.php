@@ -35,6 +35,9 @@ class Book
 			'pages' => $data->pages,
 			'date' => $data->date,
 			'language' => $data->language,
+			'read' => $data->read,
+			'own' => $data->own,
+			'description' => $data->description,
 		]);
 
 		$author = $this->db->table('author')->insert([

@@ -48,12 +48,16 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 				->setRequired();
 			$form->addText('isbn', 'ISBN:')
 				->setRequired();
-			$form->addInteger('pages', 'Počet stran')
+			$form->addInteger('pages', 'Počet stran:')
 				->setRequired();
 			$form->addDate('date', 'Datum:')
 				->setFormat('Y')
 				->setRequired();
 			$form->addText('language', 'Jazyk:')
+				->setRequired();
+			$form->addCheckbox('read', 'Přečteno:');
+			$form->addCheckbox('own', 'Mám::');
+			$form->addTextArea('description', 'Proč ji pořídít, o čem je, co jsem si zní odnesl:')
 				->setRequired();
 		}
 
