@@ -61,4 +61,13 @@ class Book
 			'title' => $data->title,
 		]);
 	}
+
+	public function findBy(array $by) {
+//		return $this->getTable()->where($by);
+		return $this->db->table('book')->where('title', $by);
+	}
+
+	public function findOneBy(array $by) {
+		return $this->findBy($by)->limit(1)->fetch();
+	}
 }
