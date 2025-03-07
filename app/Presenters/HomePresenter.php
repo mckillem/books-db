@@ -129,7 +129,12 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
 	private function searchFormSucceeded(\stdClass $data): void
 	{
-		$this->template–>search = $this->book->findOneBy([$data->text]);
-		$this->flashMessage('Kniha byla nalezena', 'success');
+//		$this->template–>search = $this->book->findOneBy([$data->text]);
+		$bookInTheDatabase = $this->book->findOneBy([$data->text]);
+		if ($bookInTheDatabase) {
+			echo $bookInTheDatabase->title;
+		} else {
+			echo "Kniha nenalezena";;
+		}
 	}
 }
