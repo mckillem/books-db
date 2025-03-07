@@ -15,21 +15,26 @@ class Book
 		$this->db = $db;
 	}
 
+	public function getTable()
+	{
+		return $this->db->table('book');
+	}
+
 	public function getAllBooks(): array
 	{
-		return $this->db->table('book')->fetchAll();
+		return $this->getTable()->fetchAll();
 	}
 
 	public function getBookById(int $id): string
 	{
-		$book = $this->db->table('book')->get($id);
+		$book = $this->getTable()->get($id);
 
 		return $book->title;
 	}
 
 	public function saveBook(\stdClass $data): void
 	{
-		$book = $this->db->table('book')->insert([
+		$book = $this->getTable()->insert([
 			'title' => $data->title,
 			'isbn' => $data->isbn,
 			'pages' => $data->pages,
@@ -52,19 +57,18 @@ class Book
 
 	public function deleteBook(int $id): void
 	{
-		$this->db->table('book')->where('id', $id)->delete();
+		$this->getTable()->where('id', $id)->delete();
 	}
 
 	public function updateBook(\stdClass $data): void
 	{
-		$this->db->table('book')->where('id', (int)$data->id)->update([
+		$this->getTable()->where('id', (int)$data->id)->update([
 			'title' => $data->title,
 		]);
 	}
 
 	public function findBy(array $by) {
-//		return $this->getTable()->where($by);
-		return $this->db->table('book')->where('title', $by);
+		return $this->getTable()->where('title', $by);
 	}
 
 	public function findOneBy(array $by) {
