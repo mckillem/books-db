@@ -20,7 +20,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
 	public function renderDefault(): void
 	{
-		$this->template->books = $this->book->getAllBooks();
+//		$this->template->books = $this->book->getAllBooks();
 	}
 
 	public function renderEdit($id): void
@@ -129,12 +129,6 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
 	private function searchFormSucceeded(\stdClass $data): void
 	{
-//		$this->template–>search = $this->book->findOneBy([$data->text]);
-		$bookInTheDatabase = $this->book->findOneBy([$data->text]);
-		if ($bookInTheDatabase) {
-			echo $bookInTheDatabase->title;
-		} else {
-			echo "Kniha nenalezena";;
-		}
+		$this->template->books = $this->book->getBook($data->text);
 	}
 }

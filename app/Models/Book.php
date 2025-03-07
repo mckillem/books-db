@@ -32,6 +32,15 @@ class Book
 		return $book->title;
 	}
 
+	public function getBook(string $searchValue)
+	{
+		return $this->getTable()->whereOr([
+			'title' => $searchValue,
+			'language' => $searchValue,
+			'date' => $searchValue,
+		])->fetchAll();
+	}
+
 	public function saveBook(\stdClass $data): void
 	{
 		$book = $this->getTable()->insert([
