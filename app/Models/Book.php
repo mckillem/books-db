@@ -35,7 +35,7 @@ class Book
 	public function getBook(string $searchValue)
 	{
 		return $this->getTable()->whereOr([
-			'title' => $searchValue,
+			'title LIKE ?' => '%' . $searchValue . '%',
 			'language' => $searchValue,
 			'date' => $searchValue,
 		])->fetchAll();
