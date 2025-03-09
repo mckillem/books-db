@@ -17,7 +17,8 @@ INSERT INTO `book` (`id`, `title`, `isbn`, `pages`, `date`, `language`, `read`, 
 VALUES (1, 'Atomic habits', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
        (2, 'Ultralearning', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
        (3, 'The answer', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
-       (4, 'Scattered minds', 'koko', 100, '2013', 'English', true, false, 'něco o knize');
+       (4, 'Scattered minds', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
+       (5, 'Hledání knih', 'koko', 342, '1992', 'Česky', true, false, 'něco o knize');
 
 CREATE TABLE `author`
 (
@@ -48,4 +49,5 @@ INSERT INTO `book_author` (`id`, `book_id`, `author_id`)
 VALUES (20,	1,	2),
        (21,	2,	3),
        (22,	3,	1),
-       (23,	4,	4);
+       (23,	4,	4),
+       (24,	5,	2);

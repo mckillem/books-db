@@ -1,6 +1,7 @@
 services:
 	- App\Router\RouterFactory::createRouter
 	- App\Models\Book
+	- App\Models\Author
 
 
 search:

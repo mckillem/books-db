@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
+use App\Models\Author;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Models\Book;
@@ -11,16 +12,19 @@ use App\Models\Book;
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
 	private Book $book;
+	private Author $author;
 	private int $id = 0;
 
-	public function __construct(Book $book)
+	public function __construct(Book $book,  Author $author)
 	{
 		$this->book = $book;
+		$this->author = $author;
 	}
 
 	public function renderDefault(): void
 	{
 //		$this->template->books = $this->book->getAllBooks();
+//		$this->template->authors = $this->author->getAllAuthors();
 	}
 
 	public function renderEdit($id): void
@@ -115,6 +119,28 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 		}
 		$this->sql = $this->context->books->findBy(array('id'=>$arr));
 	}
+	public function handleBook($book_id)
+	{
+//		if(Validators::isNumericInt($author_id) !== true)
+//		{
+//			$this->flashMessage('Autor musí být zadán podle jeho ID','alert alert-danger');
+//			$this->redirect('default');
+//		}
+//
+//		if(($this->context->author->find($author_id)) == NULL) {
+//			$this->flashMessage("Autor nebyl nalezen.", "alert alert-danger");
+//			$this->redirect("default");
+//		}
+
+		$arr = array();
+
+		foreach($this->context->booksAuthors->findBy(array('book_id'=>$book_id)) as $author)
+		{
+			$arr[] = $author->authors_id;
+		}
+		$this->sql = $this->context->authors->findBy(array('id'=>$arr));
+	}
+
 
 	public function createComponentSearchForm()
 	{
@@ -130,5 +156,6 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 	private function searchFormSucceeded(\stdClass $data): void
 	{
 		$this->template->books = $this->book->getBook($data->text);
+		$this->template->authors = $this->author->getAuthor($data->text);
 	}
 }

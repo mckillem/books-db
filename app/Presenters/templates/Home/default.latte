@@ -2,36 +2,36 @@
 	{control searchForm}
 	<a href="{link Home:edit}"><span class="glyphicon glyphicon-plus"></span> Přidej knihu</a>
 
-	<table class="table table-bordered table-striped">
+	<table n:ifset=$books class="table table-bordered table-striped">
 		<thead>
-		<tr>
-			<th>Název knihy</th>
-			<th>Autor</th>
-			<th>ISBN</th>
-			<th>Strany</th>
-			<th>Vydáno</th>
-			<th>Jazyk</th>
-			<th>Přečteno</th>
-			<th>Mám</th>
-			<th>Proč ji pořídít, o čem je, co jsem si zní odnesl</th>
-		</tr>
+			<tr>
+				<th>Název knihy</th>
+				<th>Autor</th>
+				<th>ISBN</th>
+				<th>Strany</th>
+				<th>Vydáno</th>
+				<th>Jazyk</th>
+				<th>Přečteno</th>
+				<th>Mám</th>
+				<th>Proč ji pořídít, o čem je, co jsem si zní odnesl</th>
+			</tr>
 		</thead>
 		<tbody>
-		<tr n:foreach="$books as $book">
-			<td>{$book->title}</td>
-			<td>
-				{foreach $book->related('book_author','book_id') as $author}
-					<a n:href="author!, $author->author->id">{$author->author->name}</a>{sep}, {/sep}
-				{/foreach}
-			</td>
-			<td>{$book->isbn}</td>
-			<td>{$book->pages}</td>
-			<td>{$book->date}</td>
-			<td>{$book->language}</td>
-			<td>{$book->read ? 'ano' : 'ne'}</td>
-			<td>{$book->own ? 'ano' : 'ne'}</td>
-			<td>{$book->description}</td>
-		</tr>
+			<tr n:foreach="$books as $book">
+				<td>{$book->title}</td>
+				<td>
+					{foreach $book->related('book_author','book_id') as $author}
+						<a n:href="author!, $author->author->id">{$author->author->name}</a>{sep}, {/sep}
+					{/foreach}
+				</td>
+				<td>{$book->isbn}</td>
+				<td>{$book->pages}</td>
+				<td>{$book->date}</td>
+				<td>{$book->language}</td>
+				<td>{$book->read ? 'ano' : 'ne'}</td>
+				<td>{$book->own ? 'ano' : 'ne'}</td>
+				<td>{$book->description}</td>
+			</tr>
 		</tbody>
 	</table>
 
@@ -40,4 +40,23 @@
 {*			<li>{$book->title}<a n:href="delete $book->id">Smazat</a><a n:href="Home:edit $book->id">Upravit</a></li>*}
 {*		{/foreach}*}
 {*	</ul>*}
+
+	<table n:ifset=$authors class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Autor</th>
+				<th>Knihy</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr n:foreach="$authors as $author">
+				<td>{$author->name}</td>
+				<td>
+					{foreach $author->related('book_author','author_id') as $book}
+						<a n:href="book!, $book->book->id">{$book->book->title}</a>{sep}, {/sep}
+					{/foreach}
+				</td>
+			</tr>
+		</tbody>
+	</table>
 {/block}
