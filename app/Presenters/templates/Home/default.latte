@@ -2,7 +2,7 @@
 	{control searchForm}
 	<a href="{link Home:edit}"><span class="glyphicon glyphicon-plus"></span> Přidej knihu</a>
 
-	<table n:ifset=$books class="table table-bordered table-striped">
+	<table n:ifset=$books n:if=$books class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>Název knihy</th>
@@ -21,7 +21,8 @@
 				<td>{$book->title}</td>
 				<td>
 					{foreach $book->related('book_author','book_id') as $author}
-						<a n:href="author!, $author->author->id">{$author->author->name}</a>{sep}, {/sep}
+{*						<a n:href="author!, $author->author->id">{$author->author->name}</a>{sep}, {/sep}*}
+						<a>{$author->author->name}</a>{sep}, {/sep}
 					{/foreach}
 				</td>
 				<td>{$book->isbn}</td>
@@ -41,7 +42,7 @@
 {*		{/foreach}*}
 {*	</ul>*}
 
-	<table n:ifset=$authors class="table table-bordered table-striped">
+	<table n:ifset=$authors n:if=$authors class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>Autor</th>
@@ -53,7 +54,8 @@
 				<td>{$author->name}</td>
 				<td>
 					{foreach $author->related('book_author','author_id') as $book}
-						<a n:href="book!, $book->book->id">{$book->book->title}</a>{sep}, {/sep}
+{*						<a n:href="book!, $book->book->id">{$book->book->title}</a>{sep}, {/sep}*}
+						<a>{$book->book->title}</a>{sep}, {/sep}
 					{/foreach}
 				</td>
 			</tr>
