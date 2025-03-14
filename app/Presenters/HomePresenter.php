@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Presenters;
 
 use App\Models\Author;
-use Nette;
 use Nette\Application\UI\Form;
 use App\Models\Book;
 
-final class HomePresenter extends Nette\Application\UI\Presenter
+final class HomePresenter extends BaseAdminPresenter
 {
 	private Book $book;
 	private Author $author;

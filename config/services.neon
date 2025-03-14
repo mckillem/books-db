@@ -1,7 +1,26 @@
+security:
+    roles:
+        guest:
+        member: [guest]
+        admin:
+
 services:
 	- App\Router\RouterFactory::createRouter
 	- App\Models\Book
 	- App\Models\Author
+	- App\Forms\FormFactory
+	- App\Forms\SignInFormFactory
+	authenticator: App\Models\UserManager
+	security.authorizator:
+		setup:
+			- addResource(Error)
+			- addResource(Home)
+			- addResource(Sign)
+			- allow(admin)
+			- allow(guest, Error)
+			- allow(guest, Sign)
+			- allow(member, Home, default)
+			- allow(member, Sign, out)
 
 
 search:
