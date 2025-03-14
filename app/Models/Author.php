@@ -22,7 +22,7 @@ class Author
 
 	public function getAllAuthors(): array
 	{
-		return $this->getTable()->fetchAll();
+		return $this->getTable()->fetchPairs('id', 'name');
 	}
 
 	public function getAuthor(string $text)

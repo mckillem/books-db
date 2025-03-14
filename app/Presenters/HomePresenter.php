@@ -34,6 +34,8 @@ final class HomePresenter extends BaseAdminPresenter
 
 	protected function createComponentBookForm(): Form
 	{
+		$authors = $this->author->getAllAuthors();
+
 		$form = new Form;
 
 		$form->addHidden('id')
@@ -46,7 +48,7 @@ final class HomePresenter extends BaseAdminPresenter
 		} else {
 			$form->addText('title', 'Název:')
 				->setRequired();
-			$form->addText('author', 'Autor:')
+			$form->addMultiSelect('author', 'Autor:', $authors)
 				->setRequired();
 			$form->addText('isbn', 'ISBN:')
 				->setRequired();
