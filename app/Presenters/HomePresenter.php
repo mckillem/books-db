@@ -48,7 +48,8 @@ final class HomePresenter extends BaseAdminPresenter
 		} else {
 			$form->addText('title', 'Název:')
 				->setRequired();
-			$form->addMultiSelect('author', 'Autor:', $authors)
+//			$form->addMultiSelect('author', 'Autor:', $authors)
+			$form->addText('author', 'Autor:')
 				->setRequired();
 			$form->addText('isbn', 'ISBN:')
 				->setRequired();
