@@ -18,6 +18,25 @@ final class FirstCest
     {
         // Write your tests here. All `public` methods will be executed as tests.
 		$I->amOnPage('/sign/in');
-		$I->see('Přihlásit se');
+		$I->fillField('Email:', 'cms@itnetwork.cz');
+		$I->fillField('Password:', 'itnetwork');
+		$I->click('Přihlásit');
+
+		$I->see('Přidej knihu');
+		$I->click('Přidej knihu');
+
+		$I->amOnPage('/home/edit');
+		$I->fillField('Název:', 'Dědeček');
+		$I->fillField('Autor:', 'Božena Čechová');
+		$I->fillField('ISBN:', 'jdhfhfhfhsks');
+		$I->fillField('Počet stran:', 432);
+		$I->fillField('Datum:', 432);
+		$I->fillField('Jazyk:', 'Česky');
+		$I->checkOption('Přečteno:');
+		$I->checkOption('Mám:');
+		$I->fillField('Proč ji pořídít, o čem je, co jsem si zní odnesl:', 'nevím');
+		$I->click('Přidat');
+
+		$I->dontSee('Vložení knihy');
     }
 }
