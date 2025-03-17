@@ -61,7 +61,7 @@ final class HomePresenter extends BaseAdminPresenter
 			$form->addText('language', 'Jazyk:')
 				->setRequired();
 			$form->addCheckbox('read', 'Přečteno:');
-			$form->addCheckbox('own', 'Mám::');
+			$form->addCheckbox('own', 'Mám:');
 			$form->addTextArea('description', 'Proč ji pořídít, o čem je, co jsem si zní odnesl:')
 				->setRequired();
 		}

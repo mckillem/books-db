@@ -38,5 +38,6 @@ final class FirstCest
 		$I->click('Přidat');
 
 		$I->dontSee('Vložení knihy');
+		$I->see('Kniha byla uložena');
     }
 }
