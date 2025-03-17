@@ -7,6 +7,9 @@ docker down:
 phpstan:
 	docker exec books-db vendor/bin/phpstan analyse app
 
+test:
+	docker exec books-db vendor/bin/codecept run --steps
+
 composer-install:
 	docker exec books-db composer install
 
