@@ -148,7 +148,7 @@ final class HomePresenter extends BaseAdminPresenter
 	{
 		$form = new Form();
 		$form->addText('text');
-		$form->addSubmit('submit');
+		$form->addSubmit('submit', 'Vyhledat knihu či autora');
 
 		$form->onSuccess[] = $this->searchFormSucceeded(...);
 
