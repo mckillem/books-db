@@ -18,6 +18,7 @@ final class SignPresenter extends BaseAdminPresenter
 
 	public function __construct(SignInFormFactory $signInFactory)
 	{
+		parent::__construct();
 		$this->signInFactory = $signInFactory;
 	}
 

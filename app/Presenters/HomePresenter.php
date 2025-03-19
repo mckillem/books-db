@@ -16,6 +16,7 @@ final class HomePresenter extends BaseAdminPresenter
 
 	public function __construct(Book $book, Author $author)
 	{
+		parent::__construct();
 		$this->book = $book;
 		$this->author = $author;
 	}
