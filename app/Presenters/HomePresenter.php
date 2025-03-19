@@ -14,7 +14,7 @@ final class HomePresenter extends BaseAdminPresenter
 	private Author $author;
 	private int $id = 0;
 
-	public function __construct(Book $book,  Author $author)
+	public function __construct(Book $book, Author $author)
 	{
 		$this->book = $book;
 		$this->author = $author;
@@ -34,7 +34,7 @@ final class HomePresenter extends BaseAdminPresenter
 
 	protected function createComponentBookForm(): Form
 	{
-		$authors = $this->author->getAllAuthors();
+//		$authors = $this->author->getAllAuthors();
 
 		$form = new Form;
 
@@ -75,7 +75,7 @@ final class HomePresenter extends BaseAdminPresenter
 	private function bookFormSucceeded(\stdClass $data): void
 	{
 		if ($data->id) {
-			$this->book->updateBook($data);
+//			$this->book->updateBook($data);
 		} else {
 			$this->book->saveBook($data);
 		}
@@ -84,13 +84,13 @@ final class HomePresenter extends BaseAdminPresenter
 		$this->redirect('Home:default');
 	}
 
-	public function actionDelete(int $id): void
-	{
-		$this->book->deleteBook($id);
-
-		$this->flashMessage('Kniha byla smazána', 'success');
-		$this->redirect('Home:default');
-	}
+//	public function actionDelete(int $id): void
+//	{
+//		$this->book->deleteBook($id);
+//
+//		$this->flashMessage('Kniha byla smazána', 'success');
+//		$this->redirect('Home:default');
+//	}
 
 //	public function actionUpdate(\stdClass $data, int $id): void
 //	{
@@ -100,51 +100,50 @@ final class HomePresenter extends BaseAdminPresenter
 //		$this->redirect('this');
 //	}
 
-	public function handleAuthor($author_id)
-	{
-//		if(Validators::isNumericInt($author_id) !== true)
-//		{
-//			$this->flashMessage('Autor musí být zadán podle jeho ID','alert alert-danger');
-//			$this->redirect('default');
-//		}
+//	public function handleAuthor($author_id)
+//	{
+////		if(Validators::isNumericInt($author_id) !== true)
+////		{
+////			$this->flashMessage('Autor musí být zadán podle jeho ID','alert alert-danger');
+////			$this->redirect('default');
+////		}
+////
+////		if(($this->context->author->find($author_id)) == NULL) {
+////			$this->flashMessage("Autor nebyl nalezen.", "alert alert-danger");
+////			$this->redirect("default");
+////		}
 //
-//		if(($this->context->author->find($author_id)) == NULL) {
-//			$this->flashMessage("Autor nebyl nalezen.", "alert alert-danger");
-//			$this->redirect("default");
-//		}
-
-		$arr = array();
-
-		foreach($this->context->booksAuthors->findBy(array('author_id'=>$author_id)) as $book)
-		{
-			$arr[] = $book->books_id;
-		}
-		$this->sql = $this->context->books->findBy(array('id'=>$arr));
-	}
-	public function handleBook($book_id)
-	{
-//		if(Validators::isNumericInt($author_id) !== true)
-//		{
-//			$this->flashMessage('Autor musí být zadán podle jeho ID','alert alert-danger');
-//			$this->redirect('default');
-//		}
+//		$arr = array();
 //
-//		if(($this->context->author->find($author_id)) == NULL) {
-//			$this->flashMessage("Autor nebyl nalezen.", "alert alert-danger");
-//			$this->redirect("default");
+//		foreach($this->context->booksAuthors->findBy(array('author_id'=>$author_id)) as $book)
+//		{
+//			$arr[] = $book->books_id;
 //		}
+//		$this->sql = $this->context->books->findBy(array('id'=>$arr));
+//	}
+//	public function handleBook($book_id)
+//	{
+////		if(Validators::isNumericInt($author_id) !== true)
+////		{
+////			$this->flashMessage('Autor musí být zadán podle jeho ID','alert alert-danger');
+////			$this->redirect('default');
+////		}
+////
+////		if(($this->context->author->find($author_id)) == NULL) {
+////			$this->flashMessage("Autor nebyl nalezen.", "alert alert-danger");
+////			$this->redirect("default");
+////		}
+//
+//		$arr = array();
+//
+//		foreach($this->context->booksAuthors->findBy(array('book_id'=>$book_id)) as $author)
+//		{
+//			$arr[] = $author->authors_id;
+//		}
+//		$this->sql = $this->context->authors->findBy(array('id'=>$arr));
+//	}
 
-		$arr = array();
-
-		foreach($this->context->booksAuthors->findBy(array('book_id'=>$book_id)) as $author)
-		{
-			$arr[] = $author->authors_id;
-		}
-		$this->sql = $this->context->authors->findBy(array('id'=>$arr));
-	}
-
-
-	public function createComponentSearchForm()
+	public function createComponentSearchForm(): Form
 	{
 		$form = new Form();
 		$form->addText('text');

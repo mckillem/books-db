@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models;
@@ -17,13 +18,19 @@ final class UserManager implements Authenticator
 	use SmartObject;
 
 	private const
-		TABLE_NAME = 'user',
-		COLUMN_ID = 'id',
-		COLUMN_PASSWORD_HASH = 'password',
-		COLUMN_EMAIL = 'email',
-		COLUMN_FIRSTNAME = 'firstname',
-		COLUMN_LASTNAME = 'lastname',
-		COLUMN_ROLE = 'role';
+	string COLUMN_ROLE = 'role';
+	private const
+	string COLUMN_LASTNAME = 'lastname';
+	private const
+	string COLUMN_FIRSTNAME = 'firstname';
+	private const
+	string COLUMN_EMAIL = 'email';
+	private const
+	string COLUMN_PASSWORD_HASH = 'password';
+	private const
+	string COLUMN_ID = 'id';
+	private const
+	string TABLE_NAME = 'user';
 
 	private Explorer $database;
 

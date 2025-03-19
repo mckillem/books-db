@@ -10,7 +10,7 @@ use Nette\Application\UI\Presenter;
 abstract class BaseAdminPresenter extends Presenter
 {
 	/** @var FormFactory */
-	protected $formFactory;
+	protected FormFactory $formFactory;
 
 	/**
 	 * @param FormFactory $formFactory
@@ -33,14 +33,14 @@ abstract class BaseAdminPresenter extends Presenter
 		}
 	}
 
-	public function beforeRender(): void
-	{
-		parent::beforeRender();
-		if ($this->user->isLoggedIn()) {
-			$this->template->firstname = $this->user->identity->firstname;
-			$this->template->lastname = $this->user->identity->lastname;
-			$this->template->email = $this->user->identity->email;
-			$this->template->role = $this->user->identity->role;
-		}
-	}
+//	public function beforeRender(): void
+//	{
+//		parent::beforeRender();
+//		if ($this->getUser()->isLoggedIn()) {
+//			$this->template->firstname = $this->getUser()->identity->firstname;
+//			$this->template->lastname = $this->getUser()->identity->lastname;
+//			$this->template->email = $this->getUser()->identity->email;
+//			$this->template->role = $this->getUser()->identity->role;
+//		}
+//	}
 }
