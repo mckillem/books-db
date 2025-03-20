@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Presenters;
 
 use App\Models\Author;
+use App\Models\Language;
 use Nette\Application\UI\Form;
 use App\Models\Book;
 
@@ -12,13 +13,15 @@ final class HomePresenter extends BaseAdminPresenter
 {
 	private Book $book;
 	private Author $author;
+	private Language $language;
 	private int $id = 0;
 
-	public function __construct(Book $book, Author $author)
+	public function __construct(Book $book, Author $author, Language $language)
 	{
 		parent::__construct();
 		$this->book = $book;
 		$this->author = $author;
+		$this->language = $language;
 	}
 
 	public function renderDefault(): void
@@ -36,6 +39,7 @@ final class HomePresenter extends BaseAdminPresenter
 	protected function createComponentBookForm(): Form
 	{
 //		$authors = $this->author->getAllAuthors();
+		$languages = $this->language->getAllLanguages();
 
 		$form = new Form;
 
@@ -59,7 +63,8 @@ final class HomePresenter extends BaseAdminPresenter
 			$form->addDate('date', 'Datum:')
 				->setFormat('Y')
 				->setRequired();
-			$form->addText('language', 'Jazyk:')
+			$form->addSelect('language', 'Jazyk:', $languages)
+				->setPrompt('Vyber jazyk')
 				->setRequired();
 			$form->addCheckbox('read', 'Přečteno:');
 			$form->addCheckbox('own', 'Mám:');

@@ -29,7 +29,11 @@
 				<td>{$book->isbn}</td>
 				<td>{$book->pages}</td>
 				<td>{$book->date}</td>
-				<td>{$book->language}</td>
+				<td>
+					{foreach $book->related('book_language','book_id') as $language}
+						{$language->language->name}
+					{/foreach}
+				</td>
 				<td>{$book->read ? 'ano' : 'ne'}</td>
 				<td>{$book->own ? 'ano' : 'ne'}</td>
 				<td>{$book->description}</td>

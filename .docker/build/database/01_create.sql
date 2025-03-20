@@ -5,7 +5,6 @@ CREATE TABLE `book`
     `isbn` varchar(128) NOT NULL,
     `pages` smallint(5) NOT NULL,
     `date` year NOT NULL,
-    `language` varchar(128) NOT NULL,
     `read` boolean NOT NULL default 0,
     `own` boolean NOT NULL default 0,
     `description` VARCHAR(255) NOT NULL
@@ -13,12 +12,12 @@ CREATE TABLE `book`
   CHARSET = utf8;
 
 # login: test, heslo: test (hashed)
-INSERT INTO `book` (`id`, `title`, `isbn`, `pages`, `date`, `language`, `read`, `own`, `description`)
-VALUES (1, 'Atomic habits', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
-       (2, 'Ultralearning', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
-       (3, 'The answer', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
-       (4, 'Scattered minds', 'koko', 100, '2013', 'English', true, false, 'něco o knize'),
-       (5, 'Hledání knih', 'koko', 342, '1992', 'Česky', true, false, 'něco o knize');
+INSERT INTO `book` (`id`, `title`, `isbn`, `pages`, `date`, `read`, `own`, `description`)
+VALUES (1, 'Atomic habits', 'koko', 100, '2013',  true, false, 'něco o knize'),
+       (2, 'Ultralearning', 'koko', 100, '2013',  true, false, 'něco o knize'),
+       (3, 'The answer', 'koko', 100, '2013',  true, false, 'něco o knize'),
+       (4, 'Scattered minds', 'koko', 100, '2013',  true, false, 'něco o knize'),
+       (5, 'Hledání knih', 'koko', 342, '1992', true, false, 'něco o knize');
 
 CREATE TABLE `author`
 (
@@ -67,3 +66,34 @@ CREATE TABLE IF NOT EXISTS `user` (
 # heslo itnetwork
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `role`) VALUES
     (1, 'it', 'network', 'cms@itnetwork.cz', '$2y$10$arJIJie/xGoqZayCro4yZ.pPEkt9Ps4DJBNZAHSZ/rvbOkj//K/tq', 'admin');
+
+CREATE TABLE `language`
+(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+
+INSERT INTO `language` (`id`, `name`)
+VALUES (1,	'Česky'),
+       (2,	'Anglicky'),
+       (3,	'Německy');
+
+CREATE TABLE `book_language`
+(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `book_id` int(11) NOT NULL,
+    `language_id` int(11) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `book_id` (`book_id`),
+    KEY `language_id` (`language_id`),
+    CONSTRAINT `book_language_ibfk_11` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `book_language_ibfk_10` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+
+INSERT INTO `book_language` (`id`, `book_id`, `language_id`)
+VALUES (1,	1,	2),
+       (2,	2,	3),
+       (3,	3,	1),
+       (4,	4,	3),
+       (5,	5,	2);

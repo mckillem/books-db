@@ -10,10 +10,12 @@ use Nette\Database\Table\Selection;
 class Book
 {
 	public Explorer $db;
+	private Language $language;
 
-	public function __construct(Explorer $db)
+	public function __construct(Explorer $db, Language $language)
 	{
 		$this->db = $db;
+		$this->language = $language;
 	}
 
 	public function getTable(): Selection
@@ -37,7 +39,6 @@ class Book
 	{
 		return $this->getTable()->whereOr([
 			'title LIKE ?' => '%' . $searchValue . '%',
-			'language' => $searchValue,
 			'date' => $searchValue,
 		])->fetchAll();
 	}
@@ -49,7 +50,6 @@ class Book
 			'isbn' => $data->isbn,
 			'pages' => $data->pages,
 			'date' => $data->date,
-			'language' => $data->language,
 			'read' => $data->read,
 			'own' => $data->own,
 			'description' => $data->description,
@@ -62,6 +62,13 @@ class Book
 		$this->db->table('book_author')->insert([
 			'book_id' => $book->id,
 			'author_id' => $author->id
+		]);
+
+
+
+		$this->db->table('book_language')->insert([
+			'book_id' => $book->id,
+			'language_id' => $this->language->getLanguageById($data->language)
 		]);
 	}
 

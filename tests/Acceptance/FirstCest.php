@@ -31,7 +31,7 @@ final class FirstCest
 		$I->fillField('ISBN:', 'jdhfhfhfhsks');
 		$I->fillField('Počet stran:', 432);
 		$I->fillField('Datum:', 432);
-		$I->fillField('Jazyk:', 'Česky');
+		$I->selectOption('Jazyk:', '3');
 		$I->checkOption('Přečteno:');
 		$I->checkOption('Mám:');
 		$I->fillField('Proč ji pořídít, o čem je, co jsem si zní odnesl:', 'nevím');
