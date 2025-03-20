@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Nette\Database\Explorer;
+use Nette\Database\Table\Selection;
 
 class Book
 {
@@ -15,7 +16,7 @@ class Book
 		$this->db = $db;
 	}
 
-	public function getTable()
+	public function getTable(): Selection
 	{
 		return $this->db->table('book');
 	}
@@ -32,7 +33,7 @@ class Book
 		return $book->title;
 	}
 
-	public function getBook(string $searchValue)
+	public function getBook(string $searchValue): array
 	{
 		return $this->getTable()->whereOr([
 			'title LIKE ?' => '%' . $searchValue . '%',
@@ -64,23 +65,24 @@ class Book
 		]);
 	}
 
-	public function deleteBook(int $id): void
-	{
-		$this->getTable()->where('id', $id)->delete();
-	}
-
-	public function updateBook(\stdClass $data): void
-	{
-		$this->getTable()->where('id', (int)$data->id)->update([
-			'title' => $data->title,
-		]);
-	}
-
-	public function findBy(array $by) {
-		return $this->getTable()->where('title', $by);
-	}
-
-	public function findOneBy(array $by) {
-		return $this->findBy($by)->limit(1)->fetch();
-	}
+//	public function deleteBook(int $id): void
+//	{
+//		$this->getTable()->where('id', $id)->delete();
+//	}
+//
+//	public function updateBook(\stdClass $data): void
+//	{
+//		$this->getTable()->where('id', (int)$data->id)->update([
+//			'title' => $data->title,
+//		]);
+//	}
+//
+//	public function findBy(array $by): Selection
+//	{
+//		return $this->getTable()->where('title', $by);
+//	}
+//
+//	public function findOneBy(array $by) {
+//		return $this->findBy($by)->limit(1)->fetch();
+//	}
 }

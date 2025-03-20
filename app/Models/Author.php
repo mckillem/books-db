@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Nette\Database\Explorer;
+use Nette\Database\Table\Selection;
 
 class Author
 {
@@ -15,7 +16,7 @@ class Author
 		$this->db = $db;
 	}
 
-	public function getTable()
+	public function getTable(): Selection
 	{
 		return $this->db->table('author');
 	}
@@ -25,7 +26,7 @@ class Author
 		return $this->getTable()->fetchPairs('id', 'name');
 	}
 
-	public function getAuthor(string $text)
+	public function getAuthor(string $text): array
 	{
 		return $this->getTable()->where('name LIKE ?', '%' . $text . '%')->fetchAll();
 	}
