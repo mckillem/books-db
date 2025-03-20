@@ -8,6 +8,7 @@ use App\Models\Author;
 use App\Models\Language;
 use Nette\Application\UI\Form;
 use App\Models\Book;
+use Nette\Database\Table\Selection;
 
 final class HomePresenter extends BaseAdminPresenter
 {
@@ -15,6 +16,7 @@ final class HomePresenter extends BaseAdminPresenter
 	private Author $author;
 	private Language $language;
 	private int $id = 0;
+	private Selection $books;
 
 	public function __construct(Book $book, Author $author, Language $language)
 	{
@@ -22,11 +24,15 @@ final class HomePresenter extends BaseAdminPresenter
 		$this->book = $book;
 		$this->author = $author;
 		$this->language = $language;
+		$this->books = $this->book->getAllBooks();
 	}
 
-	public function renderDefault(): void
+	public function renderDefault(int $page = 1): void
 	{
-//		$this->template->books = $this->book->getAllBooks();
+		$lastPage = 0;
+		$this->template->books = $this->books->page($page, 10, $lastPage);
+		$this->template->page = $page;
+		$this->template->lastPage = $lastPage;
 //		$this->template->authors = $this->author->getAllAuthors();
 	}
 
@@ -162,7 +168,8 @@ final class HomePresenter extends BaseAdminPresenter
 
 	private function searchFormSucceeded(\stdClass $data): void
 	{
-		$this->template->books = $this->book->getBook($data->text);
+		$this->books = $this->book->getBook($data->text);
+
 		$this->template->authors = $this->author->getAuthor($data->text);
 	}
 }

@@ -23,9 +23,14 @@ class Book
 		return $this->db->table('book');
 	}
 
-	public function getAllBooks(): array
+	public function getAllBooks(): Selection
 	{
-		return $this->getTable()->fetchAll();
+		return $this->getTable();
+	}
+
+	public function getAllBooksCount(): int
+	{
+		return $this->getTable()->count();
 	}
 
 	public function getBookById(int $id): string
@@ -35,12 +40,12 @@ class Book
 		return $book->title;
 	}
 
-	public function getBook(string $searchValue): array
+	public function getBook(string $searchValue): Selection
 	{
 		return $this->getTable()->whereOr([
 			'title LIKE ?' => '%' . $searchValue . '%',
 			'date' => $searchValue,
-		])->fetchAll();
+		]);
 	}
 
 	public function saveBook(\stdClass $data): void
@@ -63,8 +68,6 @@ class Book
 			'book_id' => $book->id,
 			'author_id' => $author->id
 		]);
-
-
 
 		$this->db->table('book_language')->insert([
 			'book_id' => $book->id,
