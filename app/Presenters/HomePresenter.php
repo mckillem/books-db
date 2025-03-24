@@ -104,7 +104,7 @@ final class HomePresenter extends BaseAdminPresenter
 				foreach ($item->related('book_author') as $author) {
 					return $author->author->name;
 				}
-				return 0;
+				return 'Autor nenalezen';
 			})
 			->setSortable(':book_author.author.name')
 			->setFilterText(':book_author.author.name');
@@ -123,7 +123,7 @@ final class HomePresenter extends BaseAdminPresenter
 				foreach ($item->related('book_language') as $language) {
 					return $language->language->name;
 				}
-				return 0;
+				return 'Jazyk nenalezen';
 			})
 			->setSortable(':book_language.language.name')
 			->setFilterText(':book_language.language.name');
