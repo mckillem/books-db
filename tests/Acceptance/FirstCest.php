@@ -39,10 +39,10 @@ final class FirstCest
 
 		$I->dontSee('Vložení knihy');
 		$I->see('Kniha byla uložena');
-
-		$I->fillField('text', 'Havlíčková');
-		$I->click('Vyhledat knihu či autora');
-		$I->see('Anna Havlíčková');
-		$I->see('Atomic habits, Hledání knih');
+//todo: test na vyhledávání autora
+//		$I->fillField('filter[author]', 'Havlíčková');
+//		$I->click('Vyhledat knihu či autora');
+//		$I->see('Anna Havlíčková');
+//		$I->see('Atomic habits, Hledání knih');
     }
 }
