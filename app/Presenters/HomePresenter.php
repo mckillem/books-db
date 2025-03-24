@@ -91,6 +91,13 @@ final class HomePresenter extends BaseAdminPresenter
 	{
 		$grid = new DataGrid();
 
+		foreach ($this->book->getAllBooks() as $book) {
+			echo $book->date;
+			foreach ($book->related('book_author') as $author) {
+				echo $author->author->name;
+			}
+		}
+
 		$grid->setDataSource($this->book->getAllBooks());
 
 		$grid->setItemsPerPageList([20, 50, 100], true);
@@ -99,10 +106,13 @@ final class HomePresenter extends BaseAdminPresenter
 			->setSortable()
 			->setFilterText();
 //todo: přidat vyhledávání dle autora
-		$grid->addColumnText('author', 'Author', ':book_author.author:book_id')
-//			->setRenderer(function($item) {
-//				return $item->title;
-//			})
+		$grid->addColumnText('author', 'Author', ':book_author.author')
+			->setRenderer(function($item) {
+				foreach ($item->related('book_author') as $author) {
+					return $author->author->name;
+				}
+				return ;
+			})
 			->setSortable();
 //			->setFilterText();
 
@@ -110,8 +120,8 @@ final class HomePresenter extends BaseAdminPresenter
 
 		$grid->addColumnText('pages', 'Strany');
 //todo: správné datum zobrazovat
-		$grid->addColumnDateTime('date', 'Vydáno');
-//			->setFormat('j. n. Y');
+		$grid->addColumnDateTime('date', 'Vydáno')
+			->setFormat('Y');
 //todo: vyhledávat dle jazyka
 		$grid->addColumnText('language', 'Jazyk', ':book_language.language_id:book_id')
 			->setSortable();
