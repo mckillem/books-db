@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
+use App\Models\Genre;
 use App\Models\Language;
 use Nette\Application\UI\Form;
 use App\Models\Book;
@@ -14,12 +15,14 @@ final class HomePresenter extends BaseAdminPresenter
 	private Book $book;
 	private Language $language;
 	private int $id = 0;
+	private Genre $genre;
 
-	public function __construct(Book $book, Language $language)
+	public function __construct(Book $book, Language $language, Genre $genre)
 	{
 		parent::__construct();
 		$this->book = $book;
 		$this->language = $language;
+		$this->genre = $genre;
 	}
 
 	public function renderDefault(): void
@@ -37,6 +40,7 @@ final class HomePresenter extends BaseAdminPresenter
 	{
 //		$authors = $this->author->getAllAuthors();
 		$languages = $this->language->getAllLanguages();
+		$genres = $this->genre->getAllGenres();
 
 		$form = new Form;
 
@@ -67,8 +71,9 @@ final class HomePresenter extends BaseAdminPresenter
 			$form->addCheckbox('own', 'Mám:');
 			$form->addTextArea('description', 'Proč ji pořídít, o čem je, co jsem si zní odnesl:')
 				->setRequired();
+			$form->addMultiSelect('genre', 'Žánr:', $genres)
+				->setRequired();
 		}
-
 		$form->addSubmit('send', 'Přidat');
 		$form->onSuccess[] = $this->bookFormSucceeded(...);
 
@@ -148,6 +153,16 @@ final class HomePresenter extends BaseAdminPresenter
 
 		$grid->addColumnText('description', 'Proč ji pořídít, o čem je, co jsem si zní odnesl')
 			->setFilterText();
+
+		$grid->addColumnText('genre', 'Žánr', ':book_genre.genre_id')
+			->setRenderer(function($item) {
+				foreach ($item->related('book_genre') as $genre) {
+					return $genre->genre->name;
+				}
+				return 'Žánr nenalezen';
+			})
+			->setSortable(':book_genre.genre.name')
+			->setFilterText(':book_genre.genre.name');
 
 		return $grid;
 	}

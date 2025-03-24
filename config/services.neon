@@ -9,6 +9,7 @@ services:
 	- App\Models\Book
 	- App\Models\Author
 	- App\Models\Language
+	- App\Models\Genre
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	authenticator: App\Models\UserManager

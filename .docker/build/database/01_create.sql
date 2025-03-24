@@ -99,3 +99,34 @@ VALUES (1,	1,	2),
        (3,	3,	1),
        (4,	4,	3),
        (5,	5,	2);
+
+CREATE TABLE `genre`
+(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+
+INSERT INTO `genre` (`id`, `name`)
+VALUES (1,	'Sci-fi'),
+       (2,	'Fantasy'),
+       (3,	'Dystopi');
+
+CREATE TABLE `book_genre`
+(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `book_id` int(11) NOT NULL,
+    `genre_id` int(11) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `book_id` (`book_id`),
+    KEY `genre_id` (`genre_id`),
+    CONSTRAINT `book_genre_ibfk_11` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `book_genre_ibfk_10` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+
+INSERT INTO `book_genre` (`id`, `book_id`, `genre_id`)
+VALUES (1,	1,	2),
+       (2,	2,	3),
+       (3,	3,	1),
+       (4,	4,	3),
+       (5,	5,	2);

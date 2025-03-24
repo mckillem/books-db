@@ -14,12 +14,14 @@ class Book
 	public Explorer $db;
 	private Language $language;
 	private User $user;
+	private Genre $genre;
 
-	public function __construct(Explorer $db, Language $language, User $user)
+	public function __construct(Explorer $db, Language $language, User $user, Genre $genre)
 	{
 		$this->db = $db;
 		$this->language = $language;
 		$this->user = $user;
+		$this->genre = $genre;
 	}
 
 	public function getTable(): Selection
@@ -80,6 +82,12 @@ class Book
 		$this->db->table('book_language')->insert([
 			'book_id' => $book->id,
 			'language_id' => $this->language->getLanguageById($data->language)
+		]);
+
+		$this->db->table('book_genre')->insert([
+			'book_id' => $book->id,
+//			todo: lze vybrat jen jeden žánr i když je multiselect, opravit
+			'genre_id' => $this->genre->getGenresById($data->genre)
 		]);
 	}
 

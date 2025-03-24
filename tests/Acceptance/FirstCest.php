@@ -37,6 +37,7 @@ final class FirstCest
 		$I->checkOption('Přečteno:');
 		$I->checkOption('Mám:');
 		$I->fillField('Proč ji pořídít, o čem je, co jsem si zní odnesl:', 'nevím');
+		$I->selectOption('Žánr:', '3');
 		$I->click('Přidat');
 
 		$I->dontSee('Vložení knihy');
