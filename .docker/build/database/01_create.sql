@@ -7,17 +7,18 @@ CREATE TABLE `book`
     `date` year NOT NULL,
     `read` boolean NOT NULL default 0,
     `own` boolean NOT NULL default 0,
-    `description` VARCHAR(255) NOT NULL
+    `description` VARCHAR(255) NOT NULL,
+    `createdAt` datetime NOT NULL
 ) ENGINE = InnoDB
   CHARSET = utf8;
 
 # login: test, heslo: test (hashed)
-INSERT INTO `book` (`id`, `title`, `isbn`, `pages`, `date`, `read`, `own`, `description`)
-VALUES (1, 'Atomic habits', 'koko', 100, '2013',  true, false, 'něco o knize'),
-       (2, 'Ultralearning', 'koko', 100, '2013',  true, false, 'něco o knize'),
-       (3, 'The answer', 'koko', 100, '2013',  true, false, 'něco o knize'),
-       (4, 'Scattered minds', 'koko', 100, '2013',  true, false, 'něco o knize'),
-       (5, 'Hledání knih', 'koko', 342, '1992', true, false, 'něco o knize');
+INSERT INTO `book` (`id`, `title`, `isbn`, `pages`, `date`, `read`, `own`, `description`, `createdAt`)
+VALUES (1, 'Atomic habits', 'koko', 100, '2013',  true, false, 'něco o knize', '2000-01-01 01:03:38'),
+       (2, 'Ultralearning', 'koko', 100, '2013',  true, false, 'něco o knize', '2000-01-01 01:03:38'),
+       (3, 'The answer', 'koko', 100, '2013',  true, false, 'něco o knize', '2000-01-01 01:03:38'),
+       (4, 'Scattered minds', 'koko', 100, '2013',  true, false, 'něco o knize', '2000-01-01 01:03:38'),
+       (5, 'Hledání knih', 'koko', 342, '1992', true, false, 'něco o knize', '2000-01-01 01:03:38');
 
 CREATE TABLE `author`
 (

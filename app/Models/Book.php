@@ -58,6 +58,8 @@ class Book
 			'read' => $data->read,
 			'own' => $data->own,
 			'description' => $data->description,
+//			todo: zobrazení správného data v rámci časové zony, teď je to o hodinu
+			'createdAt' => new \DateTime(),
 		]);
 
 		$author = $this->db->table('author')->insert([
