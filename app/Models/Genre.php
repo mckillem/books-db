@@ -26,9 +26,9 @@ class Genre
 		return $this->getTable()->fetchPairs('id', 'name');
 	}
 
-	public function getGenresById(array $ids): int
+	public function getGenreById(int $id): int
 	{
-		$genre = $this->getTable()->get($ids);
+		$genre = $this->getTable()->get($id);
 
 		return $genre->id;
 	}

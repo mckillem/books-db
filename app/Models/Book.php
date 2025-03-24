@@ -84,11 +84,12 @@ class Book
 			'language_id' => $this->language->getLanguageById($data->language)
 		]);
 
-		$this->db->table('book_genre')->insert([
-			'book_id' => $book->id,
-//			todo: lze uložit jen jeden žánr i když je multiselect, opravit
-			'genre_id' => $this->genre->getGenresById($data->genre)
-		]);
+		foreach ($data->genre as $genre) {
+			$this->db->table('book_genre')->insert([
+				'book_id' => $book->id,
+				'genre_id' => $this->genre->getGenreById($genre)
+			]);
+		}
 	}
 
 //	public function deleteBook(int $id): void
