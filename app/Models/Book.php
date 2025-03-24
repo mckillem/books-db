@@ -86,7 +86,7 @@ class Book
 
 		$this->db->table('book_genre')->insert([
 			'book_id' => $book->id,
-//			todo: lze vybrat jen jeden žánr i když je multiselect, opravit
+//			todo: lze uložit jen jeden žánr i když je multiselect, opravit
 			'genre_id' => $this->genre->getGenresById($data->genre)
 		]);
 	}
