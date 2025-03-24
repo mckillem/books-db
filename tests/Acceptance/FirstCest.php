@@ -17,6 +17,7 @@ final class FirstCest
     public function tryToTest(AcceptanceTester $I): void
     {
         // Write your tests here. All `public` methods will be executed as tests.
+		$I->wantToTest('Login');
 		$I->amOnPage('/sign/in');
 		$I->fillField('Email:', 'cms@itnetwork.cz');
 		$I->fillField('Password:', 'itnetwork');
@@ -25,6 +26,7 @@ final class FirstCest
 		$I->see('Přidej knihu');
 		$I->click('Přidej knihu');
 
+		$I->wantToTest('Adding a book');
 		$I->amOnPage('/home/edit');
 		$I->fillField('Název:', 'Dědeček');
 		$I->fillField('Autor:', 'Božena Čechová');
@@ -39,10 +41,15 @@ final class FirstCest
 
 		$I->dontSee('Vložení knihy');
 		$I->see('Kniha byla uložena');
-//todo: test na vyhledávání autora
+
+//todo: je potřeba zjistit jak stiskout enter a je otázka jestli datagrid potřebuju testovat
+//		https://stackoverflow.com/questions/17082080/codeception-presskey-enter-does-not-work#26278808
+		$I->wantToTest('Search for the author');
 //		$I->fillField('filter[author]', 'Havlíčková');
-//		$I->click('Vyhledat knihu či autora');
+//		$I->submitForm('#frm-grid-filter-filter-author', ['Havlíčková']);
 //		$I->see('Anna Havlíčková');
-//		$I->see('Atomic habits, Hledání knih');
+//		$I->see('Atomic habits');
+//		$I->see('Hledání knih');
+//		$I->dontSee('Ultralearning');
     }
 }
