@@ -6,16 +6,20 @@ namespace App\Models;
 
 use Nette\Database\Explorer;
 use Nette\Database\Table\Selection;
+use Nette\Security\SimpleIdentity;
+use Nette\Security\User;
 
 class Book
 {
 	public Explorer $db;
 	private Language $language;
+	private User $user;
 
-	public function __construct(Explorer $db, Language $language)
+	public function __construct(Explorer $db, Language $language, User $user)
 	{
 		$this->db = $db;
 		$this->language = $language;
+		$this->user = $user;
 	}
 
 	public function getTable(): Selection
@@ -58,8 +62,10 @@ class Book
 			'read' => $data->read,
 			'own' => $data->own,
 			'description' => $data->description,
-//			todo: zobrazení správného data v rámci časové zony, teď je to o hodinu
+//			todo: zobrazení správného data v rámci časové zony, teď je to o hodinu, test?
 			'createdAt' => new \DateTime(),
+//			todo: test?
+			'createdBy' => $this->user->getId(),
 		]);
 
 		$author = $this->db->table('author')->insert([
