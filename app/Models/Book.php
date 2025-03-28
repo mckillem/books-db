@@ -6,22 +6,18 @@ namespace App\Models;
 
 use Nette\Database\Explorer;
 use Nette\Database\Table\Selection;
-use Nette\Security\SimpleIdentity;
 use Nette\Security\User;
 
 class Book
 {
-	public Explorer $db;
-	private Language $language;
-	private User $user;
-	private Genre $genre;
-
-	public function __construct(Explorer $db, Language $language, User $user, Genre $genre)
+	public function __construct(
+		public Explorer $db,
+		private Language $language,
+		private User $user,
+		private Genre $genre,
+		private Author $author
+	)
 	{
-		$this->db = $db;
-		$this->language = $language;
-		$this->user = $user;
-		$this->genre = $genre;
 	}
 
 	public function getTable(): Selection
@@ -70,14 +66,12 @@ class Book
 			'createdBy' => $this->user->getId(),
 		]);
 
-		$author = $this->db->table('author')->insert([
-			'name' => $data->author
-		]);
-
-		$this->db->table('book_author')->insert([
-			'book_id' => $book->id,
-			'author_id' => $author->id
-		]);
+		foreach ($data->author as $author) {
+			$this->db->table('book_author')->insert([
+				'book_id' => $book->id,
+				'author_id' => $this->author->getAuthorById($author)
+			]);
+		}
 
 		$this->db->table('book_language')->insert([
 			'book_id' => $book->id,

@@ -29,7 +29,7 @@ final class FirstCest
 		$I->wantToTest('Adding a book');
 		$I->amOnPage('/home/edit');
 		$I->fillField('Název:', 'Dědeček');
-		$I->fillField('Autor:', 'Božena Čechová');
+		$I->selectOption('Autor:', '3');
 		$I->fillField('ISBN:', 'jdhfhfhfhsks');
 		$I->fillField('Počet stran:', 432);
 		$I->fillField('Datum:', 432);

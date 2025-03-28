@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
+use App\Models\Author;
 use App\Models\Genre;
 use App\Models\Language;
 use Nette\Application\UI\Form;
@@ -12,17 +13,16 @@ use Ublaboo\DataGrid\DataGrid;
 
 final class HomePresenter extends BaseAdminPresenter
 {
-	private Book $book;
-	private Language $language;
 	private int $id = 0;
-	private Genre $genre;
 
-	public function __construct(Book $book, Language $language, Genre $genre)
+	public function __construct(
+		private Book $book,
+		private Language $language,
+		private Genre $genre,
+		private Author $author
+	)
 	{
 		parent::__construct();
-		$this->book = $book;
-		$this->language = $language;
-		$this->genre = $genre;
 	}
 
 	public function renderDefault(): void
@@ -38,7 +38,7 @@ final class HomePresenter extends BaseAdminPresenter
 
 	protected function createComponentBookForm(): Form
 	{
-//		$authors = $this->author->getAllAuthors();
+		$authors = $this->author->getAllAuthors();
 		$languages = $this->language->getAllLanguages();
 		$genres = $this->genre->getAllGenres();
 
@@ -54,8 +54,7 @@ final class HomePresenter extends BaseAdminPresenter
 		} else {
 			$form->addText('title', 'Název:')
 				->setRequired();
-//			$form->addMultiSelect('author', 'Autor:', $authors)
-			$form->addText('author', 'Autor:')
+			$form->addMultiSelect('author', 'Autor:', $authors)
 				->setRequired();
 			$form->addText('isbn', 'ISBN:')
 				->setRequired();

@@ -30,4 +30,11 @@ class Author
 	{
 		return $this->getTable()->where('name LIKE ?', '%' . $text . '%')->fetchAll();
 	}
+
+	public function getAuthorById(int $id): int
+	{
+		$author = $this->getTable()->get($id);
+
+		return $author->id;
+	}
 }
