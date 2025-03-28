@@ -56,6 +56,7 @@ final class HomePresenter extends BaseAdminPresenter
 				->setRequired();
 			$form->addMultiSelect('author', 'Autor:', $authors)
 				->setRequired();
+//			todo: validace
 			$form->addText('isbn', 'ISBN:')
 				->setRequired();
 			$form->addInteger('pages', 'Počet stran:')

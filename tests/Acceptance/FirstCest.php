@@ -32,7 +32,7 @@ final class FirstCest
 		$I->selectOption('Autor:', '3');
 		$I->fillField('ISBN:', 'jdhfhfhfhsks');
 		$I->fillField('Počet stran:', 12345);
-		$I->fillField('Datum:', 432);
+		$I->fillField('Datum:', '21.4.1999');
 		$I->selectOption('Jazyk:', '3');
 		$I->checkOption('Přečteno:');
 		$I->checkOption('Mám:');
