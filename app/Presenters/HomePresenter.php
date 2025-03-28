@@ -59,6 +59,7 @@ final class HomePresenter extends BaseAdminPresenter
 			$form->addText('isbn', 'ISBN:')
 				->setRequired();
 			$form->addInteger('pages', 'Počet stran:')
+				->addRule($form::Max, 'Kniha může mít nejvíc %d stran.', 99999)
 				->setRequired();
 			$form->addDate('date', 'Datum:')
 				->setFormat('Y')
