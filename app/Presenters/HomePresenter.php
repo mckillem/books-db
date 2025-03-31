@@ -167,6 +167,17 @@ final class HomePresenter extends BaseAdminPresenter
 			->setSortable(':book_genre.genre.name')
 			->setFilterText(':book_genre.genre.name');
 
+		$grid->addColumnLink('file', 'Kniha v elektronické podobě', 'neco', ':book_file.file_id')
+			->setRenderer(function($item) {
+				foreach ($item->related('book_file') as $file) {
+					return $file->file->file_name;
+				}
+				return 'Soubor nenalezen';
+			})
+			->setOpenInNewTab()
+			->setSortable(':book_file.file.file_name')
+			->setFilterText(':book_file.file.file_name');
+
 		return $grid;
 	}
 }
