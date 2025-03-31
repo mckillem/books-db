@@ -130,3 +130,31 @@ VALUES (1,	1,	2),
        (3,	3,	1),
        (4,	4,	3),
        (5,	5,	2);
+
+CREATE TABLE `file`
+(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `file_name` varchar(255) NOT NULL,
+    `type` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+
+INSERT INTO `file` (`id`, `file_name`, `type`)
+VALUES (1,	'obr.jpg', 'image'),
+       (2,	'atom.pdf', 'pdf');
+
+CREATE TABLE `book_file`
+(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `book_id` int(11) NOT NULL,
+    `file_id` int(11) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `book_id` (`book_id`),
+    KEY `file_id` (`file_id`),
+    CONSTRAINT `book_file_ibfk_11` FOREIGN KEY (`file_id`) REFERENCES `file` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `book_file_ibfk_10` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+
+INSERT INTO `book_file` (`id`, `book_id`, `file_id`)
+VALUES (1,	1,	2),
+       (2,	2,	1);

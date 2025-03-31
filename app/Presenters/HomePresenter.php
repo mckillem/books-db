@@ -74,6 +74,8 @@ final class HomePresenter extends BaseAdminPresenter
 				->setRequired();
 			$form->addMultiSelect('genre', 'Žánr:', $genres)
 				->setRequired();
+			$form->addUpload('file', 'Soubory:');
+			$form->addUpload('image', 'Obrázky:');
 		}
 		$form->addSubmit('send', 'Přidat');
 		$form->onSuccess[] = $this->bookFormSucceeded(...);

@@ -7,6 +7,7 @@ namespace App\Models;
 use Nette\Database\Explorer;
 use Nette\Database\Table\Selection;
 use Nette\Security\User;
+use Nette\Utils\FileSystem;
 
 class Book
 {
@@ -84,6 +85,19 @@ class Book
 				'genre_id' => $this->genre->getGenreById($genre)
 			]);
 		}
+
+		$file = $this->db->table('file')->insert([
+			'file_name' => $data->file,
+			'type' => substr((string)$data->file, strrpos((string)$data->file, '.') + 1),
+//			'createdAt' => new \DateTime(),
+		]);
+
+		FileSystem::copy((string)$data->file, 'images/' . $data->file . '.pdf');
+
+		$this->db->table('book_file')->insert([
+			'book_id' => $book->id,
+			'file_id' => $file->id,
+		]);
 	}
 
 //	public function deleteBook(int $id): void
