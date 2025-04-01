@@ -85,6 +85,7 @@ final class HomePresenter extends BaseAdminPresenter
 
 	private function bookFormSucceeded(\stdClass $data): void
 	{
+
 		if ($data->id) {
 //			$this->book->updateBook($data);
 		} else {

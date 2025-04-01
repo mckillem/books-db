@@ -86,13 +86,14 @@ class Book
 			]);
 		}
 
+		$fileName = $data->file->name;
 		$file = $this->db->table('file')->insert([
-			'file_name' => $data->file,
-			'type' => substr((string)$data->file, strrpos((string)$data->file, '.') + 1),
+			'file_name' => $fileName,
+			'type' => substr($fileName, strrpos($fileName, '.') + 1),
 //			'createdAt' => new \DateTime(),
 		]);
 
-		FileSystem::copy((string)$data->file, 'images/' . $data->file . '.pdf');
+		FileSystem::copy((string)$data->file, 'images/' . $fileName);
 
 		$this->db->table('book_file')->insert([
 			'book_id' => $book->id,
