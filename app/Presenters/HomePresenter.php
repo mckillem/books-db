@@ -179,6 +179,16 @@ final class HomePresenter extends BaseAdminPresenter
 			->setSortable(':book_file.file.file_name')
 			->setFilterText(':book_file.file.file_name');
 
+		$grid->addColumnText('image', 'Obrázek knihy', ':book_file.file_id')
+			->setRenderer(function($item) {
+				foreach ($item->related('book_file') as $file) {
+					if ($file->file->type == 'jpg' || $file->file->type == 'jpeg' || $file->file->type == 'png') {
+						return $file->file->file_name;
+					}
+				}
+				return 'Soubor nenalezen';
+			});
+
 		return $grid;
 	}
 }
