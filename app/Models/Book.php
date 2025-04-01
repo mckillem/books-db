@@ -99,6 +99,20 @@ class Book
 			'book_id' => $book->id,
 			'file_id' => $file->id,
 		]);
+
+		$imageName = $data->image->name;
+		$image = $this->db->table('file')->insert([
+			'file_name' => $imageName,
+			'type' => substr($imageName, strrpos($imageName, '.') + 1),
+//			'createdAt' => new \DateTime(),
+		]);
+
+		FileSystem::copy((string)$data->image, 'images/' . $imageName);
+
+		$this->db->table('book_file')->insert([
+			'book_id' => $book->id,
+			'file_id' => $image->id,
+		]);
 	}
 
 //	public function deleteBook(int $id): void
